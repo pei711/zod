@@ -3072,6 +3072,23 @@ z.parse(stringToLength, "hello"); // => 5
 </Tab>
 </Tabs>
 
+### `.overwrite()`
+
+Use `.overwrite()` to transform a value without changing its inferred type. The callback returns the replacement value, and the schema keeps its original class so you can continue chaining its methods. In Zod Mini, use `z.overwrite()` with `.check()`.
+
+<Tabs groupId="lib" items={["Zod", "Zod Mini"]}>
+<Tab value="Zod">
+```ts
+const schema = z.number().overwrite(val => val ** 2).max(100);
+```
+</Tab>
+<Tab value="Zod Mini">
+```ts
+const schema = z.number().check(z.overwrite(val => val ** 2));
+```
+</Tab>
+</Tabs>
+
 ### `.transform()`
 
 Piping some schema into a transform is a common pattern, so Zod provides a convenience `.transform()` method.
